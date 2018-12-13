@@ -1,70 +1,25 @@
-# Simple enough, just import everything from tkinter.
 from tkinter import *
-
-# Here, we are creating our class, Window, and inheriting from the Frame
-# class. Frame is a class from the tkinter module. (see Lib/tkinter/__init__)
-class Window(Frame):
-
-    # Define settings upon initialization. Here you can specify
-    def __init__(self, master=None):
-        
-        # parameters that you want to send through the Frame class. 
-        Frame.__init__(self, master)   
-        #reference to the master widget, which is the tk window                 
-        self.master = master
-        #with that, we want to then run init_window, which doesn't yet exist
-        self.init_window()
-
-    #Creation of init_window
-    def init_window(self):
-
-        # changing the title of our master widget      
-        self.master.title("GUI")
-
-        # allowing the widget to take the full space of the root window
-        self.pack(fill=BOTH, expand=1)
-
-        # creating a menu instance
-        menu = Menu(self.master)
-        self.master.config(menu=menu)
-
-        # create the file object)
-        file = Menu(menu)
-        # adds a command to the menu option, calling it exit, and the
-        # command it runs on event is client_exit
-        file.add_command(label="Exit", command=self.client_exit)
-        #added "file" to our menu
-        menu.add_cascade(label="File", menu=file)
-
-        # create the file object)
-        edit = Menu(menu)
-        # adds a command to the menu option, calling it exit, and the
-        # command it runs on event is client_exit
-        edit.add_command(label="Show Text", command=self.showText)
-        edit.add_command(label="Undo")
-        #added "file" to our menu
-        menu.add_cascade(label="Edit", menu=edit)
-
-        exitButton = Button(self, text="Exit", command=self.client_exit)
-        exitButton.place(x=0, y=0)
-
-    def showText(self):
-        text = Label(self, text="Hey there good lookin!")
-        text.pack()
-
-    def client_exit(self):
-        exit()
-
-
-# root window created. Here, that would be the only window, but
-# you can later have windows within windows.
-root = Tk()
-
-root.geometry("400x300")
-
-#creation of an instance
-app = Window(root)
-
-
-#mainloop 
-root.mainloop()
+ 
+from tkinter import messagebox
+ 
+window = Tk()
+ 
+window.title("Welcome to LikeGeeks app")
+ 
+window.geometry('350x200')
+ 
+def clicked():
+    messagebox.showinfo('Message title', 'Message content')
+    messagebox.showwarning('Message title', 'Message content')  #shows warning message
+    messagebox.showerror('Message title', 'Message content')    #shows error message
+    res = messagebox.askquestion('Message title','Message content')
+    res = messagebox.askyesno('Message title','Message content')
+    res = messagebox.askyesnocancel('Message title','Message content')
+    res = messagebox.askokcancel('Message title','Message content')
+    res = messagebox.askretrycancel('Message title','Message content')
+ 
+btn = Button(window,text='Click here', command=clicked)
+ 
+btn.place(x=100,y=100)
+ 
+window.mainloop()
